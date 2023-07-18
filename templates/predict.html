@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Prediction</title>
+    <style>
+        nav {
+            display: flex;
+			justify-content: space-between;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+            background-color: #208bb392;
+		}
+    h4
+    {
+        color: rgb(251, 247, 247);
+        font-size:16px;
+        padding-left: 80px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    .index
+    {
+        padding-top: 0.5cm;
+        padding-right: 80px;
+    }
+    a
+    {
+        color: rgb(251, 245, 245);
+        font-size: 14px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    body 
+    {
+            margin: 50px;
+            padding: 10px;
+            font-family: 'Times New Roman', Times, serif;
+            background-image: url('photos/weather1.jpg');
+            background-color:#000000cc;
+            background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        
+    }
+        .container {
+            margin: 50px auto;
+            width: 80%;
+            max-width: 800px;
+            border: 2px solid #ccc;
+            padding: 20px;
+            background-color: #9ab4c5;
+        }
+        h1 {
+            text-align: center;
+            color: #555;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+        label {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #333;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        input[type="file"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ddd;
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 20px;
+            width: 70%;
+            max-width: 400px;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        input[type="submit"]:hover {
+            background-color: #3e8e41;
+            background-image: url("weather.jpg");
+		}
+        #preview {
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+    </style>
+  <script>
+    function previewImage(event) {
+        var preview = document.querySelector('#selectedImage');
+        var imageName = document.querySelector('#imageName');
+        var file = event.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function() {
+            var output = document.getElementById('preview');
+            output.innerHTML = '<img src="' + reader.result + '">';
+            preview.src = reader.result;
+            imageName.textContent = file.name; // Display the image name
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+            imageName.textContent = ""; // Clear the image name if no file is selected
+        }
+    }
+    document.querySelector('form').addEventListener('submit', function(event)
+     {
+        event.preventDefault(); // Prevent the form from submitting
+
+        var file = document.querySelector('input[type=file]').files[0];
+        if (file) {
+            var formData = new FormData();
+            formData.append('image', file);
+
+            // Perform your prediction logic here using formData
+            // For example, you can send an AJAX request to the server
+            // After prediction, you can update the UI with the result
+
+            // Simulating a delay to show the result
+            setTimeout(function() {
+                var predictionResult = "Sunny"; // Replace with the actual prediction result
+
+                // Display the prediction result
+                var predictionElement = document.querySelector('#predictionResult');
+                predictionElement.textContent = "Prediction: " + predictionResult;
+
+                // Display the selected image and image name after prediction
+                var preview = document.querySelector('#selectedImage');
+                var imageName = document.querySelector('#imageName');
+                preview.src = URL.createObjectURL(file);
+                imageName.textContent = file.name;
+            }, 2000);
+        }
+    });
+</script>
+
+</head>
+<body>
+    <nav>
+        <h4>Smartbridge</h4>
+        <div class="index">
+            <a href="about.html" style="text-decoration: none;"> About&nbsp;&nbsp;&nbsp;</a>
+            <a href="images.html"style="text-decoration: none;"> Image&nbsp;&nbsp;&nbsp;</a>    
+            <a href="predict.html"style="text-decoration: none;"> Predict&nbsp;&nbsp;&nbsp;</a>
+            <a href="visualization.html"style="text-decoration: none;"> Visualization&nbsp;&nbsp;&nbsp;</a>
+        </div>    
+    </nav>
+    <div class="container">
+        <h1>Weather Prediction</h1>
+        <form action="predict" method="post" enctype="multipart/form-data">
+            <label for="image">Drop an image to predict:</label>
+            <input type="file" id="image" name="image" onchange="previewImage(event)">
+            <img id="preview" style="max-width: 300px; margin-top: 10px;">
+            <img id="selectedImage" style="max-width: 300px; margin-top: 10px;">
+            <h2 id="imageName" align="center"></h2>
+            <h2 id="predictionResult" align="center"></h2>
+            <input type="submit" value="Predict">
+        </form>
+        <br>
+        {% if result %}
+            <h2 align="center">{{ result }}</h2>
+        {% endif %}
+    </div>
+    <br><br>
+    <center>
+        <a href="index.html">
+            <input type="button" value="Back">
+        </a>
+    </center>
+</body>

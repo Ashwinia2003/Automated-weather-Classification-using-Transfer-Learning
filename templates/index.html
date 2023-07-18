@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>home page</title>
+</head>
+<style>
+body
+    {
+        background-image: url('photos/weather1.jpg');
+        background-color: rgba(0, 0, 0, 0.511);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        background-blend-mode: multiply;
+    }
+nav {
+            display: flex;
+			justify-content: space-between;
+			padding: 10px;
+			position: fixed;
+			top: 0.5cm;
+			left: 1cm;
+			right: 1cm;
+		} 
+h1
+{
+    color: white;
+    padding-top: 18%;
+    font-size: 8ch;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+}
+h2,a
+{
+  color: white;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+} 
+
+p
+{
+  color: white;
+  font-size: 18px;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+}
+.button
+{
+    background-color: #4D4DFF;
+    font-size: 15px;
+    padding: 20px;
+    border-radius: 40px;
+    max-width: fit-content;
+    border-style: none;
+    overflow: hidden;
+    color: white;
+    align-content: center;
+}
+    </style> 
+   <body>
+    <nav>
+		<h2>Smartbridge</h2>
+	<div>
+		<a href="about.html" style="text-decoration: none;"> About&nbsp;&nbsp;&nbsp;</a>
+		<a href="images.html"style="text-decoration: none;"> Image&nbsp;&nbsp;&nbsp;</a>	
+		<a href="predict.html"style="text-decoration: none;"> Predict&nbsp;&nbsp;&nbsp;</a>
+        <a href="visualization.html"style="text-decoration: none;"> Visualization&nbsp;&nbsp;&nbsp;</a>
+    </div>	
+	</nav>
+    <div><h1>Weather Classification Using<br/>Transfer Learning<br/><a class="line">_</a></h1>
+        <p>Through this project we will be able to classify the type of weather.</p><br/>
+        <center><a href="about.html"><input type="button" value="Few details" class="button"></a></center>
+        </div><br/>
+</body>
+</html>
